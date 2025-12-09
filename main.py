@@ -1,15 +1,16 @@
 import re
 import uuid
 
-import settings
 import uvicorn
 from fastapi import FastAPI, HTTPException, status
 from fastapi.routing import APIRouter
 from pydantic import BaseModel, EmailStr, field_validator
-from sqlaclhemy.orm import declarative_base, sessionmaker
 from sqlalchemy import Boolean, Column, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.orm import declarative_base, sessionmaker
+
+from settings import settings
 
 # ====== create app ======
 app = FastAPI(title="Tryf Pet Project")
@@ -137,7 +138,7 @@ router = APIRouter()
 
 # set routes to the app instance
 router.include_router(user_router, prefix="/user", tags=["user"])
-app.include_router(main_api_router)
+app.include_router(router)
 
 
 if __name__ == "__main__":

@@ -8,12 +8,19 @@ class Settings(BaseSettings):
     DB_PASSWORD: str
     DB_NAME: str
 
+    @property
+    def REAL_DATABASE_URL(self) -> str:
+        # fastapi async
+        return f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
+    @property
+    def SYNC_DATABASE_URL(self) -> str:
+        # alembic sync
+        return f"postgresql+psycopg2://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
     class Config:
         env_file = ".env"
 
 
 settings = Settings()
-
-REAL_DATABASE_URL = f"postgresql+asyncpg://{settings.DB_USER}:{settings.DB_PASSWORD}@{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}"
-
 print(settings.DB_HOST)

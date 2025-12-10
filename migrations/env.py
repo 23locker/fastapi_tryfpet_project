@@ -5,7 +5,7 @@ from os.path import abspath, dirname
 from alembic import context
 from sqlalchemy import engine_from_config, pool
 
-from settings import settings
+from config import settings
 
 # need for file alembic
 sys.path.insert(0, dirname(dirname(dirname(abspath(__file__)))))

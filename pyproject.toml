@@ -1,7 +1,7 @@
 [project]
-name = "fastapi-pet-project"
+name = "finflow"
 version = "0.1.0"
-description = "a chill pet project where i mess around with fastapi, try stuff out, and break things on purpose"
+description = "FinFlow is microservice banking application based on FastAPI"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

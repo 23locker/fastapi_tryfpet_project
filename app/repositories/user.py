@@ -24,7 +24,7 @@ class UserRepository(BaseRepository[User]):
         result = await self.session.execute(select(User).where(User.email == email))
         return result.scalars().first()
 
-    async def get_user_by_id(self, user_id: UUID) -> Optional[User]:
+    async def get_by_user_id(self, user_id: UUID) -> Optional[User]:
         """
         Take user by UUID
 
@@ -55,5 +55,3 @@ class UserRepository(BaseRepository[User]):
             select(User).where(User.email == email).limit(1)
         )
         return result.scalars().first() is not None
-        
-    

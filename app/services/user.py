@@ -1,13 +1,13 @@
 from datetime import timedelta
 from uuid import UUID
 
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.core.exceptions import (
     InvalidCredentialsException,
     ResourceNotFoundException,
     UserAlreadyExistsException,
 )
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.core.security import PasswordManager, TokenManager
 from app.models.user import User
 from app.repositories.user import UserRepository
@@ -66,7 +66,7 @@ class UserService:
             raise InvalidCredentialsException()
 
         access_token = TokenManager.create_access_token(
-            data={"sub": str(user._id)},
+            data={"sub": str(user.user_id)},
             expires_delta=timedelta(minutes=30),
         )
 

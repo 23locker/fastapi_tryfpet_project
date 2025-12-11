@@ -48,7 +48,7 @@ class User(BaseModel):
         nullable=False,
         comment="Check for active user or not",
     )
-    is_verifed = Column(
+    is_verified = Column(
         Boolean,
         default=False,
         nullable=False,

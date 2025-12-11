@@ -1,11 +1,11 @@
 from typing import Annotated
 from uuid import UUID
 
-from app.core.exceptions import ResourceNotFoundException
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPAuthCredentials, HTTPBearer
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.exceptions import ResourceNotFoundException
 from app.core.security import TokenManager
 from app.db.session import get_db_session
 from app.models.user import User
@@ -14,7 +14,9 @@ from app.services.user import UserService
 security = HTTPBearer()
 
 
-async def get_current_user_id(credentials: HTTPAuthCredentials = Depends(security)):
+async def get_current_user_id(
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+):
     """
     Depends for take ID current user from JWT token
 
